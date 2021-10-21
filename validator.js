@@ -60,8 +60,8 @@ testNode.insert(20);
 testNode.insert(17);
 testNode.insert(99);
 
-//--- If you uncommon one of the belows, the result should be false. ---/
-//--- If you uncommon all of the belows, the result should be true. ---/
+//--- If you uncomment one of the belows, the result should be false. ---/
+//--- If you keep all of the belows stay comments, the result should be true. ---/
 
 // testNode.left.left = new Node(1);
 // testNode.right.right = new Node(11);
