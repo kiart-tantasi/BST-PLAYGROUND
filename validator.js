@@ -61,7 +61,7 @@ testNode.insert(17);
 testNode.insert(99);
 
 //--- If you uncomment one of the belows, the result should be false. ---/
-//--- If you keep all of the belows stay comments, the result should be true. ---/
+//--- If you keep commenting all of the belows, the result should be true. ---/
 
 // testNode.left.left = new Node(1);
 // testNode.right.right = new Node(11);
