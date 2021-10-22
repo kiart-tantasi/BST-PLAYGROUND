@@ -20,7 +20,7 @@ class Node {
     }
 }
 
-    //--- function for validating --- //
+    //--- function for validating Version 1.0 --- //
 
 function validate(node, min = null, max = null) {
     //Checking Min Max
@@ -50,6 +50,32 @@ function validate(node, min = null, max = null) {
     }
 }
 
+    //--- function for validating Version 2.0 --- //
+
+// function validate(node,min=null,max=null) {
+
+//   if (max !== null && node.data > max) {
+//     return false;
+//   }
+//   if (min !== null && node.data < min) {
+//     return false;
+//   }
+//   if (!node.left && !node.right) {
+//     return true;
+//   }
+//   if (node.left && node.right) {
+//     return validate(node.left, min, node.data) && validate(node.right, node.data, max);
+//   }
+//   if(node.left) {
+//     return validate(node.left, min, node.data);
+//   }
+//   if(node.right) {
+//     return validate(node.right, node.data, max);
+//   }
+// }
+
+
+// --- For Testing --- //
 const testNode = new Node(10);
 testNode.insert(0);
 testNode.insert(12);
@@ -59,10 +85,8 @@ testNode.insert(11);
 testNode.insert(20);
 testNode.insert(17);
 testNode.insert(99);
-
 //--- If you uncomment one of the belows, the result should be false. ---/
 //--- If you keep all of the belows stay comments, the result should be true. ---/
-
 // testNode.left.left = new Node(1);
 // testNode.right.right = new Node(11);
 // testNode.left.right = new Node(11);
@@ -70,9 +94,7 @@ testNode.insert(99);
 // testNode.left.left.right = new Node(1);
 // testNode.right.right.left = new Node(11);
 // testNode.right.right.right = new Node(11);
-
 console.log(validate(testNode));
-
 // ------   See the result at index.html in console (Press F12)   ----- //
 
 
@@ -81,7 +103,7 @@ console.log(validate(testNode));
 
 
 
-// ---- This is the function that I learned a course in Udemy. Hopefully, he won't sue me. ---//
+// ---- This is the function that I learned from a course in Udemy. Hopefully, he won't sue me. ---//
 
 // function validate(node, min = null, max = null) {
 //     if (max !== null && node.data > max) {
