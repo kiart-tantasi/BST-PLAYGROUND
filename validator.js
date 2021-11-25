@@ -53,7 +53,6 @@ function validate(node, min = null, max = null) {
     //--- function for validating Version 2.0 --- //
 
 // function validate(node,min=null,max=null) {
-
 //   if (max !== null && node.data > max) {
 //     return false;
 //   }
@@ -63,14 +62,45 @@ function validate(node, min = null, max = null) {
 //   if (!node.left && !node.right) {
 //     return true;
 //   }
-//   if (node.left && node.right) {
+//   else if (node.left && node.right) {
 //     return validate(node.left, min, node.data) && validate(node.right, node.data, max);
 //   }
-//   if(node.left) {
+//   else if(node.left) {
 //     return validate(node.left, min, node.data);
 //   }
-//   if(node.right) {
+//   else if(node.right) {
 //     return validate(node.right, node.data, max);
+//   }
+// }
+
+    //--- function for validating Version 2.0 with description --- //
+
+// function validate(node, min = null, max = null) {
+//   // --- failed --- //
+//   //over max
+//   if (max !== null && node.data > max) {
+//       return false;
+//   }
+//   //above min
+//   if (min !== null && node.data < min) {
+//       return false;
+//   }
+//   // --- passed --- //
+//   //have both left and right nodes
+//   if (node.left && node.right) {
+//       return validate(node.left, min, node.data) && validate(node.right, node.data, max)
+//   }
+//   //have only left node
+//   else if (node.left) {
+//       return validate(node.left,min,node.data);
+//   }
+//   //have only right node
+//   else if (node.right) {
+//       return validate(node.right, node.data, max);
+//   }
+//   //no nodes at all (return true from roots up to the top)
+//   else if (!node.right && !node.left) {
+//       return true;
 //   }
 // }
 
