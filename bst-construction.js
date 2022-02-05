@@ -42,74 +42,70 @@ class BST {
   remove(value) {
     if (!this.left && !this.right) return;
     const found = this.find(value);
-    if (found === null) return; //not found
-    if (found.found.value === null) return; // value is null
-    const getMin = found.found.getMinFromRightSide();
-    const newNode = getMin !== null ? getMin.min : null;
-    const newNodesParent = getMin !== null ? getMin.from : null;
+    const node = found ? found.found : null;
+    const parent = found ? found.from : null;
+    if (!node) {
+      console.log("not found");
+      return;
+    }
 
-    // delete the root and got only left nodes
-    if (!newNode && !found.from && !this.right) {
-      console.log("no parent and no min from right");
-      if (found.found.left.right === null) {
-        found.found.value = found.found.left.value;
-        found.found.left = found.found.left.left;
+    // 1: THE REMOVING NODE GOT NO RIGHT NODE AND PARENT
+    if (!node.right && !parent) {
+      if (!node.left.right) {
+        node.value = node.left.value;
+        node.left = node.left.left;
+      } else if (node.left.right) {
+        // find min from node.left.right side and swap with the removing idea
       }
       return;
     }
 
-    if (!newNode && found.from) { //cant find new node from the right side but no parent
-      if (found.from.left !== null && found.from.left.value === value) {
-        if (found.found.left) {
-          found.from.left = found.found.left;
-        } else found.from.left = null;
-        return;
-      } else if (
-        found.from.right !== null &&
-        found.from.right.value === value
-      ) {
-        if (found.found.left) {
-          found.from.left = found.found.left;
-        } else found.from.right = null;
+    //2: THE REMOVING NODE GOT NO RIGHT NODE BUT GOT PARENT
+    if (!node.right && parent) {
+      if (parent.left && parent.left.value === value) {
+        parent.left = node.left;
         return;
       }
-    } else if (newNode) { // can find new node from right side
-      found.found.value = newNode.value;
-      if (
-        newNodesParent !== null &&
-        newNodesParent.left !== null &&
-        newNodesParent.left.value === newNode.value
-      ) {
-        newNodesParent.left = newNode.left;
+      if (parent.right && parent.right.value === value) {
+        parent.right = node.left;
         return;
-      } else if (
-        newNodesParent !== null &&
-        newNodesParent.right !== null &&
-        newNodesParent.right.value === newNode.value
-      ) {
-        newNodesParent.right = newNode.right;
+      }
+    }
+
+    //3: THE REMOVING NODE GOT RIGHT NODE (BOTH CASES: WITH PARENT AND NO PARENT)
+    if ((node.right && parent) || (node.right && !parent)) {
+      const min = node.right.getMin(node);
+      const minNode = min.min;
+      const minParent = min.from;
+
+      if (minParent.left && minParent.left.value === minNode.value) {
+        node.value = minNode.value;
+        if (minNode.right) {
+          minParent.left = minNode.right;
+          minNode.right.left = minNode.left;
+        } else minParent.left = minNode.left;
+        return;
+      } else {
+        // if (minParent.right && minParent.right.value === minNode.value) {
+        node.value = minNode.value;
+        minParent.right = minNode.right;
         return;
       }
     }
   }
 
-  getMinFromRightSide(initialized = false, from = null) {
-    if (initialized === false && !this.right) return null; // no right nodes at all
-    if (initialized === true) {
-      if (this.left !== null) return this.left.getMinFromRightSide(true, this);
-      else if (this.left === null) return { min: this, from: from };
-    } else {
-      return this.right.getMinFromRightSide(true, this);
-    }
+  getMin(from) {
+    if (this.left !== null) return this.left.getMin(this);
+    else return { min: this, from: from };
   }
 
   find(value, from = null) {
     if (this.value === value) return { found: this, from: from };
     if (value > this.value) {
-      if (this.right === null) return null; // not found
+      if (this.right === null) return false;
       else return this.right.find(value, this);
     } else if (value < this.value) {
-      if (this.left === null) return null; // not found
+      if (this.left === null) return false;
       else return this.left.find(value, this);
     }
   }
