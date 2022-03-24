@@ -141,7 +141,7 @@ testNode.insert(99);
 // testNode.right.right.left = new Node(11);
 // testNode.right.right.right = new Node(11);
 console.log(validate(testNode));
-// ------   See the result at index.html in console (Press F12)   ----- //
+// ------   Run node to see the result ("/node validator.js")   ----- //
 
 
 
